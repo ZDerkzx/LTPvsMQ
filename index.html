@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Comparación Detallada: LTP vs MQ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    margin: 0;
+    padding: 40px 20px;
+    color: #f0f4f8;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 700;
+    font-size: 2.8rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  }
+  table {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 50px auto;
+    border-collapse: collapse;
+    background: #0d1f3c;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+  thead tr {
+    background: #1464a0;
+  }
+  th, td {
+    padding: 18px 24px;
+    text-align: center;
+    font-size: 1rem;
+    border-bottom: 1px solid #214d7a;
+  }
+  th {
+    color: #f0f4f8;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  tbody tr:hover {
+    background: #224b75;
+  }
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+  .check {
+    color: #4caf50;
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+  .cross {
+    color: #e74c3c;
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+  .neutral {
+    color: #f39c12;
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+  caption {
+    caption-side: bottom;
+    padding: 16px;
+    font-style: italic;
+    color: #a9c0e8;
+    font-size: 0.9rem;
+  }
+  /* Icons */
+  .icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  .icon-speed::before { content: "⚡"; }
+  .icon-storage::before { content: "💾"; }
+  .icon-security::before { content: "🔒"; }
+  .icon-scale::before { content: "📈"; }
+  .icon-tools::before { content: "🛠️"; }
+  .icon-network::before { content: "🌐"; }
+  .icon-users::before { content: "👥"; }
+  .icon-info::before { content: "❓"; }
+
+  /* Section: curiosidad */
+  .curiosity {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #1c2d50;
+    padding: 28px 36px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #d0d9ff;
+    text-align: center;
+  }
+  .curiosity strong {
+    color: #f9d342;
+  }
+  .curiosity a {
+    color: #f9d342;
+    text-decoration: none;
+    font-weight: 700;
+  }
+  .curiosity a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 600px) {
+    th, td {
+      padding: 12px 10px;
+      font-size: 0.85rem;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    .curiosity {
+      font-size: 1rem;
+      padding: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Comparación Detallada: <span class="icon icon-info"></span>LTP vs MQ</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Característica</th>
+      <th>LTP (Live Transfer Processing)</th>
+      <th>MQ (Message Queue)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="icon icon-speed"></span>Velocidad y latencia</td>
+      <td class="check">Muy rápido, baja latencia</td>
+      <td class="cross">Más lento, latencia mayor</td>
+    </tr>
+    <tr>
+      <td><span class="icon icon-storage"></span>Persistencia</td>
+      <td class="cross">No persistente, sin almacenamiento offline</td>
+      <td class="check">Persistente, almacena hasta entrega</td>
+    </tr>
+    <tr>
+      <td><span class="icon icon-scale"></span>Tamaño de payload</td>
+      <td class="check">Soporta paquetes grandes, fragmentación posible</td>
+      <td class="neutral">Limitado, optimizado para mensajes pequeños</td>
+    </tr>
+    <tr>
+      <td><span class="icon icon-security"></span>Fiabilidad y reenvío</td>
+      <td class="check">Reenvío en conexión activa, sin reintentos offline</td>
+      <td class="check">Garantía de entrega con reintentos y confirmaciones</td>
+    </tr>
+    <tr>
+      <td><span class="icon icon-tools"></span>Complejidad</td>
+      <td class="check">Simple, menos componentes</td>
+      <td class="cross">Complejo, requiere brokers y lógica extra</td>
+    </tr>
+    <tr>
+      <td><span class="icon icon-network"></span>Tolerancia a fallos de red</td>
+      <td class="cross">Baja, pierde paquetes si no hay conexión activa</td>
+      <td class="check">Alta, almacena y reintenta mensajes</td>
+    </tr>
+    <tr>
+      <td><span class="icon icon-users"></span>Casos de uso típicos</td>
+      <td>Streaming en vivo, telemetría, juegos online, sensores</td>
+      <td>Sistemas empresariales, microservicios, colas de trabajo</td>
+    </tr>
+    <tr>
+      <td><span class="icon icon-info"></span>Escalabilidad</td>
+      <td class="neutral">Depende de la infraestructura, fácil de escalar horizontalmente</td>
+      <td class="check">Muy alta, con clustering y replicación</td>
+    </tr>
+    <tr>
+      <td><span class="icon icon-info"></span>Soporte para procesamiento en orden</td>
+      <td class="cross">No garantiza orden estrictamente</td>
+      <td class="check">Sí, garantiza orden de entrega</td>
+    </tr>
+    <tr>
+        <td><span class="icon icon-tools"></span>Consumo de recursos</td>
+        <td class="check">Bajo consumo, eficiente para sistemas ligeros</td>
+        <td class="cross">Más recursos por almacenamiento y gestión</td>
+    </tr>
+  </tbody>
+  <caption>Tabla comparativa avanzada entre dos modelos de mensajería</caption>
+</table>
+
+<div class="curiosity">
+  <strong>¿Sabías que...</strong> <br />
+  El <strong>LTP</strong> es ideal para situaciones donde la velocidad es clave y la pérdida ocasional de paquetes no afecta el resultado final, como en transmisión de video en vivo o videojuegos multijugador.<br /><br />
+  Aunque no guarda mensajes offline, puede implementar técnicas de reenvío durante conexiones activas para mejorar la fiabilidad sin sacrificar latencia.<br /><br />
+  <a href="https://es.wikipedia.org/wiki/Licklider_Transmission_Protocol" target="_blank" rel="noopener noreferrer">Explora más sobre protocolos de transferencia en tiempo real aquí</a> y descubre cómo la ciencia espacial inspiró algunos de estos conceptos.<br /><br />
+  ¿Quieres profundizar o ver ejemplos prácticos? ¡Solo dime!
+</div>
+
+<section class="info-section">
+  <h2>¿Qué es LTP y para qué se creó?</h2>
+  <p>
+    <strong>LTP (Live Transfer Processing)</strong> es un protocolo de mensajería diseñado para transmitir grandes cantidades de datos en tiempo real, sin la necesidad de almacenarlos durante largos períodos. Se creó para <em>solucionar el problema de la alta latencia y el manejo de datos voluminosos en sistemas donde la velocidad es crítica</em>, como en transmisiones en vivo, telemetría espacial o videojuegos multijugador.
+  </p>
+  <p>
+    A diferencia de otros sistemas que guardan mensajes para asegurar su entrega, LTP prioriza el envío inmediato y el procesamiento rápido, aceptando que algunos paquetes se puedan perder si el receptor está desconectado. Esto hace que sea ideal para escenarios donde la información es valiosa solo si se recibe “en vivo” y rápidamente.
+  </p>
+  <p>
+    LTP fue creado para ofrecer una solución simple y eficiente que maneja la fragmentación de datos grandes, el reenvío rápido de paquetes perdidos durante la conexión activa y un bajo consumo de recursos, permitiendo sistemas ágiles y de alta velocidad.
+  </p>
+  <p>
+    En resumen, LTP es la opción perfecta cuando <em>la rapidez y el procesamiento en tiempo real son más importantes que la garantía absoluta de entrega</em>.
+  </p>
+</section>
+
+<section class="info-section">
+  <h2>¿Qué es MQ y para qué se creó?</h2>
+  <p>
+    <strong>MQ (Message Queue)</strong> es un sistema de mensajería diseñado para garantizar la entrega fiable y ordenada de mensajes entre aplicaciones, incluso cuando los receptores están temporalmente desconectados. Se creó para <em>resolver el problema de la comunicación asincrónica confiable en entornos distribuidos y complejos</em>, donde es fundamental que ningún mensaje se pierda.
+  </p>
+  <p>
+    A diferencia de protocolos en tiempo real como LTP, MQ almacena los mensajes en colas persistentes hasta que el receptor puede procesarlos, asegurando que la información se entregue de manera segura y en el orden correcto. Esto lo hace ideal para sistemas empresariales, procesamiento de transacciones y microservicios.
+  </p>
+  <p>
+    MQ fue desarrollado para ofrecer una solución robusta que maneja confirmaciones, reintentos automáticos y escalabilidad, permitiendo la comunicación fiable incluso en redes inestables o con múltiples productores y consumidores.
+  </p>
+  <p>
+    En resumen, MQ es la opción perfecta cuando <em>la garantía de entrega, la persistencia y el orden estricto de los mensajes son prioritarios</em>.
+  </p>
+</section>
+
+<section class="info-section" style="max-width: 900px; margin: 0 auto 60px auto; background: #1a2e4c; padding: 30px 40px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.5); color: #d0d9f7; font-size: 1.1rem; line-height: 1.7;">
+  <h2 style="color: #f9d342; font-weight: 700; font-size: 2rem; text-align: center; margin-bottom: 24px;">¿Y entonces, con cuál me quedo?</h2>
+
+  <p>
+    Tranquilo, si llegaste hasta acá es porque de verdad te interesa hacer bien tu proyecto — y eso ya es un gran paso.
+  </p>
+
+  <p>
+    Ahora sí: elegir entre <strong>LTP</strong> y <strong>MQ</strong> no se trata de cuál es “mejor”, sino de cuál encaja con lo que realmente necesita tu aplicación.
+  </p>
+
+  <ul style="list-style-type: disc; padding-left: 20px; margin-bottom: 20px;">
+    <li>
+      <strong>¿Tu prioridad es la velocidad?</strong> ¿Querés que los datos se transmitan en tiempo real, sin preocuparte tanto por si el receptor está o no conectado? Entonces <strong>LTP</strong> es tu opción. Es excelente manejando grandes volúmenes de datos gracias a que puede fragmentarlos y enviarlos por partes. A diferencia de muchos <em>message queues</em> convencionales, que no están diseñados para cargas tan pesadas (y cuyo rendimiento cae fuerte si lo forzás), LTP sigue funcionando rápido y liviano.
+    </li>
+
+    <li>
+      <strong>¿Tu prioridad es la fiabilidad?</strong> ¿Necesitás estar 100% seguro de que cada mensaje llegue, incluso si hay desconexiones? Ahí <strong>MQ</strong> brilla. Guarda los mensajes, los reintenta, respeta el orden. Es lo que necesitás para sistemas bancarios, procesos internos, microservicios o cualquier aplicación donde perder datos es impensable.
+    </li>
+  </ul>
+
+  <p>
+    En resumen: <strong>LTP</strong> es ideal para transmitir mucho, rápido, y en tiempo real. <strong>MQ</strong> es perfecto cuando la prioridad es que todo llegue sí o sí, aunque tarde un poco más.
+  </p>
+
+  <p>
+    ¿Y si necesitás ambas cosas? Nada te impide usar los dos. Muchos sistemas modernos combinan lo mejor de cada uno. Lo importante es entender bien qué rol cumple cada uno.
+  </p>
+</section>
+
+</body>
+</html>
